@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public LevelChanger levC;
     public void PlayGame()
     {
-        SceneManager.LoadScene("CombatArena");
+        levC.FadeToLevel();
     }
 }

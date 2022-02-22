@@ -28,6 +28,7 @@ public class EnemyController : MonoBehaviour
     private int hitAnimation;
     private int attack1Animation;
     private int attack2Animation;
+    private int attack3Animation;
     private int noted;
     private int victoryAnimation;
     private bool alreadyNoted;
@@ -52,6 +53,7 @@ public class EnemyController : MonoBehaviour
         hitAnimation = Animator.StringToHash("hit");
         attack1Animation = Animator.StringToHash("attack1");
         attack2Animation = Animator.StringToHash("attack2");
+        attack3Animation = Animator.StringToHash("attack3");
         noted = Animator.StringToHash("noted");
         victoryAnimation = Animator.StringToHash("gameover");
     }
@@ -80,7 +82,7 @@ public class EnemyController : MonoBehaviour
             FaceTarget();
             animator.SetBool(runningAnimation, true);
 
-            if (distance <= attackRange - 5f)
+            if (distance <= attackRange - 2f)
             {
                 animator.SetBool(standingAnimation, true);
                 AttackPlayer();
@@ -128,14 +130,14 @@ public class EnemyController : MonoBehaviour
         {
             float attackType = UnityEngine.Random.Range(0f, 10f);
 
-            if (attackType <= 5f)
-            {
+            if (attackType <= 3.3f)
                 animator.SetTrigger(attack2Animation);
-            }
-            else
-            {
+            
+            else if (3.3f < attackType && 6.6f >= attackType)
                 animator.SetTrigger(attack1Animation);
-            }
+            
+            else
+                animator.SetTrigger(attack3Animation);
             alreadyAttacked = true;
             StartCoroutine("ResetAttack");
         }
